@@ -35,16 +35,19 @@
     </style>
     <script>
         taskInput = document.querySelector('#time');
+        let interval;
+
         taskInput.addEventListener("keyup", e => {
             if (e.key == "Enter" && document.getElementById("time").value != '') {
                 const a = document.getElementById("time").value;
                 departMinutes= parseInt(a);
                 document.getElementById("time").value = '';
                 let temps = departMinutes * 60
+                clearInterval(interval);
 
                 const timerElement = document.getElementById("affiche")
 
-                setInterval(() => {
+                interval = setInterval(() => {
                     let minutes = parseInt(temps / 60, 10)
                     let secondes = parseInt(temps % 60, 10)
 
