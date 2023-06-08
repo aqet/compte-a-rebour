@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Récupérer la valeur d'un input texte</title>
+  </head>
+  <body>
+    <input type="text" placeholder="Entrez une valeur ici" id="time">
+    <div id="affiche"></div>
+    <style>
+        body{
+            margin-top: 250px;
+            display: grid;
+            align-items: center;
+            justify-content: center;
+            background-color: black;
+            color: white;
+        }
+
+        #time{
+            height: 80px;
+            font-size: 50px;
+            background: transparent;
+            color: white;
+            border: none;
+            outline: none;
+            text-align: center;
+        }
+
+        #affiche{
+            margin-top: 50px;
+            font-size: 100px;
+            text-align: center;
+        }
+    </style>
+    <script>
+        taskInput = document.querySelector('#time');
+        taskInput.addEventListener("keyup", e => {
+            if (e.key == "Enter" && document.getElementById("time").value != '') {
+                const a = document.getElementById("time").value;
+                departMinutes= parseInt(a);
+                document.getElementById("time").value = '';
+                let temps = departMinutes * 60
+
+                const timerElement = document.getElementById("affiche")
+
+                setInterval(() => {
+                    let minutes = parseInt(temps / 60, 10)
+                    let secondes = parseInt(temps % 60, 10)
+
+                    minutes = minutes < 10 ? "0" + minutes : minutes
+                    secondes = secondes < 10 ? "0" + secondes : secondes
+
+                    timerElement.innerText = `${minutes}:${secondes}`
+                    temps = temps <= 0 ? 0 : temps - 1
+                }, 1000);
+            }
+        });
+    </script>
+  </body>
+</html>
